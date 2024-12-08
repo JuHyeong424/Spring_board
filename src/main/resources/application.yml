@@ -6,15 +6,15 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_member?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: user_member
+    url: jdbc:mysql://localhost:3306/db_board?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: user_board
     password: 1234
   thymeleaf:
     cache: false
 
   # spring data jpa 설정
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
     show-sql: true
     hibernate:
