@@ -1,5 +1,7 @@
 package com.example.board.dto;
 
+import com.example.board.entity.BaseEntity;
+import com.example.board.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,4 +21,27 @@ public class BoardDTO {
     private int boardHits; // 조회수
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
+
+    // paging 만들 때 사용할 생성자 alt + insert
+    public BoardDTO(Long id, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
+        this.id = id;
+        this.boardWriter = boardWriter;
+        this.boardTitle = boardTitle;
+        this.boardHits = boardHits;
+        this.boardCreatedTime=boardCreatedTime;
+    }
+
+    // entity에서 dto로 전환
+    public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(boardEntity.getId());
+        boardDTO.setBoardWriter(boardEntity.getBoardWriter());
+        boardDTO.setBoardPass(boardEntity.getBoardPass());
+        boardDTO.setBoardTitle(boardEntity.getBoardTitle());
+        boardDTO.setBoardHits(boardEntity.getBoardHits());
+        boardDTO.setBoardContents(boardEntity.getBoardContents());
+        boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
+        boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+        return  boardDTO;
+    }
 }
