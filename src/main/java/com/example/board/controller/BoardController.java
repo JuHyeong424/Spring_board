@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,7 +32,7 @@ public class BoardController {
 
     @PostMapping("/save") // /board/save로 들어오는 post 요청 처리
     // BoardDTO 클래스를 찾아서 save.html에 있는 name과 필드 값이 같으면 필드에 setter로 값 담음
-    public String save(@ModelAttribute BoardDTO boardDTO) {
+    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println("boardDTO = " + boardDTO);
         boardService.save(boardDTO);
         return "index";
