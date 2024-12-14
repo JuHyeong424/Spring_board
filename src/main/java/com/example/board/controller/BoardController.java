@@ -1,7 +1,9 @@
 package com.example.board.controller;
 
 import com.example.board.dto.BoardDTO;
+import com.example.board.dto.CommentDTO;
 import com.example.board.service.BoardService;
+import com.example.board.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,7 @@ public class BoardController {
     객체의 결합도를 낮추고 코드의 재사용성과 테스트 용이성을 높임
      */
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping("/save") // '/board/save'로 들어오는 get 요청 시
     public String saveForm() {
@@ -59,6 +62,9 @@ public class BoardController {
 
         boardService.updateHits(id); // 해당 id에 헤당하는 게시글 조회수 1 증가
         BoardDTO boardDTO = boardService.findById(id); // 해당 id 게시글의 id를 dto에 저장
+        /* 댓글 목록 가져오기 */
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        model.addAttribute("commonList", commentDTOList);
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
         return "detail";
